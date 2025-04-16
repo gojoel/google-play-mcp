@@ -1,11 +1,31 @@
 [project]
 name = "google-play-mcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "A Model Context Protocol server providing tools to manage Google Play publishings using an LLM"
+authors = [{name = "Joel Goncalves", email = "goncalves.joel95@gmail.com"}]
 readme = "README.md"
-requires-python = ">=3.10"
 dependencies = [
     "fastmcp>=2.1.2",
     "google-api-python-client>=2.167.0",
     "google-auth>=2.39.0",
 ]
+requires-python = ">=3.10"
+
+keywords = [
+    "mcp",
+    "mcp server",
+    "mcp client",
+    "model context protocol",
+    "fastmcp",
+    "llm",
+    "agent",
+    "google play",
+    "android"
+]
+
+[build-system]
+requires = [ "hatchling",]
+build-backend = "hatchling.build"
+
+[project.scripts]
+google-play-mcp = "google_play_mcp.server:run_server"

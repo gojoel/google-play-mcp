@@ -2,6 +2,7 @@
 
 # pylint: disable=no-member, import-error
 
+import os
 from typing import Dict, List
 
 from fastmcp import FastMCP
@@ -15,8 +16,11 @@ mcp = FastMCP("Google Play MCP Server")
 async def retrieve_app_apks(package_name: str) -> List[Dict[str, str]]:
     """Lists all the apks for a given app."""
 
+    service_acc_key_file = os.getenv("GCP_SERVICE_ACCOUNT_KEY")
+    if not service_acc_key_file:
+        raise ValueError("GCP_SERVICE_ACCOUNT_KEY not defined")
+
     scopes = ["https://www.googleapis.com/auth/androidpublisher"]
-    service_acc_key_file = "key.json"
 
     credentials = service_account.Credentials.from_service_account_file(
         service_acc_key_file, scopes=scopes
@@ -38,5 +42,10 @@ async def retrieve_app_apks(package_name: str) -> List[Dict[str, str]]:
     return apks_result["apks"]
 
 
-if __name__ == "__main__":
+def run_server():
+    """Run the MCP server."""
     mcp.run()
+
+
+if __name__ == "__main__":
+    run_server()

@@ -28,6 +28,3 @@ wheels/
 .python-version
 .envrc
 .direnv/
-
-
-key.*
